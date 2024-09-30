@@ -43,6 +43,7 @@ urlpatterns = [
     path('api/accounts/password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
     path('api/products/', include('modules.products.urls')),
     path('api/agents/', include('modules.agents.urls')),
+    path('api/contracts/', include('modules.contracts.urls')),
 
     re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0),
           name='schema-json'),

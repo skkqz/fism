@@ -5,3 +5,4 @@ django-unfold==0.39.0
 django-rest-passwordreset==1.4.1
 drf-yasg==1.21.7
 setuptools==75.1.0
+tzdata==2024.2

@@ -1,5 +1,6 @@
 from itertools import product
 
+from PIL.JpegPresets import presets
 from django.shortcuts import get_object_or_404
 from rest_framework import serializers
 
@@ -17,15 +18,18 @@ class LOBSerializer(serializers.ModelSerializer):
     Сериалайзер для хранения информации о линии бизнеса.
     """
 
+    risks = serializers.PrimaryKeyRelatedField(queryset=Risk.objects.all(), many=True, required=True, label='Риски продукта')
+
     class Meta:
         model = LOB
-        fields = ('id', 'name')
+        fields = ('id', 'name', 'risks')
 
     def to_representation(self, instance):
         response = super().to_representation(instance)
 
         meta_fields = ProductMetaField.objects.filter(lob=instance)
         response['meta_fields'] = ProductMetaFieldSerializer(meta_fields, many=True).data
+        response['risks'] = RiskSerializer(instance.risks.all(), many=True).data
 
         return response
 
@@ -36,7 +40,15 @@ class LOBForProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = LOB
-        fields = ('id', 'name')
+        fields = ('id', 'name', 'risks')
+
+    def to_representation(self, instance):
+        response = super().to_representation(instance)
+        meta_fields = ProductMetaField.objects.filter(lob=instance)
+        response['meta_fields'] = ProductMetaFieldSerializer(meta_fields, many=True).data
+        response['risks'] = RiskSerializer(instance.risks.all(), many=True).data
+
+        return response
 
 
 class ProductMetaFieldSerializer(serializers.ModelSerializer):
@@ -48,14 +60,13 @@ class ProductMetaFieldSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ProductMetaField
-        fields = ('id', 'name', 'lob', 'risks', 'updated_at', 'created_at')
+        fields = ('id', 'name', 'lob', 'is_required', 'updated_at', 'created_at')
         read_only_fields = ('created_at','updated_at',)
 
 
     def to_representation(self, instance):
 
         response = super().to_representation(instance)
-        response['risks'] = RiskSerializer(instance.risks.all(), many=True).data
 
         return response
 
@@ -65,18 +76,15 @@ class ProductSerializer(serializers.ModelSerializer):
     Сериалайзер для страхового продукта.
     """
 
-    risks = serializers.PrimaryKeyRelatedField(queryset=Risk.objects.all(), many=True, required=True, label='Риски продукта')
-
     class Meta:
         model = Product
-        fields = ('id', 'name', 'lob', 'risks')
+        fields = ('id', 'name', 'lob', )
         read_only_fields = ('created_at','updated_at', )
 
     def to_representation(self, instance):
 
         response = super().to_representation(instance)
         response['lob'] = LOBForProductSerializer(instance.lob).data
-        response['risks'] = RiskSerializer(instance.risks.all(), many=True).data
 
         return response
 
@@ -88,7 +96,7 @@ class RiskSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Risk
-        fields = ('id', 'name', 'rate', 'value', 'updated_at', 'created_at')
+        fields = ('id', 'name', 'value', 'updated_at', 'created_at')
         read_only_fields = ('created_at','updated_at',)
 
 

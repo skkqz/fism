@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'drf-yasg',
     'django_rest_passwordreset',
 
     'modules.accounts',

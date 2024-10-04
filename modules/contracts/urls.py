@@ -3,7 +3,7 @@ from rest_framework import routers
 
 from .views import ContractView, ContractRiskView
 
-app_name = 'agents'
+app_name = 'app_contracts'
 
 router = routers.SimpleRouter()
 router.register('contracts', ContractView, basename='contracts')

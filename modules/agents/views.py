@@ -3,7 +3,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from .models import Face, Agent, Division, AgentAgreements
 from .serializer import FaceSerializer, AgentSerializer, DivisionSerialize, AgentAgreementsSerializer
-from ..permissons import IsAgentOrAdminPermission
+from modules.permissons import IsAgentOrAdminPermission
 
 
 class DivisionView(ModelViewSet):

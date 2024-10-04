@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from .mixins import AtomicMixin
 from .models import Product, Risk, ProductMetaField, LOB
-from . serializer import (ProductSerializer, ProductMetaFieldSerializer, RiskSerializer, CopyProductSerializer,
+from .serializer import (ProductSerializer, ProductMetaFieldSerializer, RiskSerializer, CopyProductSerializer,
                           LOBSerializer)
 
 

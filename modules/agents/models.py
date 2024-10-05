@@ -75,7 +75,7 @@ class Agent(models.Model):
         verbose_name_plural = 'Агенты'
 
     def __str__(self):
-        return f'{self.face}'
+        return f'{self.face} - {self.status} - {self.division}'
 
 
 class AgentAgreements(models.Model):

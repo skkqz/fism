@@ -55,10 +55,10 @@ class LoginUserSerializer(serializers.Serializer):
 
     def create(self, attrs):
 
+        print(User.objects.get(email='agent@gmail.com'))
         user = authenticate(email=attrs['email'], password=attrs['password'])
         if user is None:
             raise serializers.ValidationError({'message': 'Неверные учетные данные.'})
-
         login(self.context['request'], user)
         logger.info(f'Пользователь {user} успешно авторизовался.')
 

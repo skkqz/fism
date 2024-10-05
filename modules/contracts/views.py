@@ -1,5 +1,5 @@
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, DjangoModelPermissions
 
 from .models import Contract, ContractRisk
 from .serializer import ContractSerializer, ContractRiskSerializer
@@ -12,7 +12,7 @@ class ContractView(ModelViewSet):
 
     queryset = Contract.objects.all()
     serializer_class = ContractSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, DjangoModelPermissions]
 
 
 class ContractRiskView(ModelViewSet):
@@ -22,4 +22,4 @@ class ContractRiskView(ModelViewSet):
 
     queryset = ContractRisk.objects.all()
     serializer_class = ContractRiskSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, DjangoModelPermissions]

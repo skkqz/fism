@@ -1,6 +1,6 @@
 from rest_framework.generics import ListAPIView, UpdateAPIView, RetrieveAPIView, DestroyAPIView, CreateAPIView
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, DjangoModelPermissions
 
 from .mixins import AtomicMixin
 from .models import Product, Risk, ProductMetaField, LOB
@@ -15,7 +15,7 @@ class ProductView(AtomicMixin, ModelViewSet):
 
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, DjangoModelPermissions]
 
 
 class RiskView(AtomicMixin, ModelViewSet):
@@ -25,7 +25,7 @@ class RiskView(AtomicMixin, ModelViewSet):
 
     queryset = Risk.objects.all()
     serializer_class = RiskSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, DjangoModelPermissions]
 
 
 class ProductMetaFieldView(AtomicMixin, ModelViewSet):
@@ -35,7 +35,7 @@ class ProductMetaFieldView(AtomicMixin, ModelViewSet):
 
     queryset = ProductMetaField.objects.all()
     serializer_class = ProductMetaFieldSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, DjangoModelPermissions]
 
 
 class LOBView(AtomicMixin, ModelViewSet):
@@ -45,7 +45,7 @@ class LOBView(AtomicMixin, ModelViewSet):
 
     queryset = LOB.objects.all()
     serializer_class = LOBSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, DjangoModelPermissions]
 
 
 class CopyProductView(AtomicMixin ,CreateAPIView):
@@ -55,4 +55,4 @@ class CopyProductView(AtomicMixin ,CreateAPIView):
 
     queryset = Product.objects.all()
     serializer_class = CopyProductSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, DjangoModelPermissions]

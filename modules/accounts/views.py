@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model, logout
 from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, UpdateAPIView
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated, DjangoModelPermissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.views import status
@@ -17,7 +17,7 @@ class UserRegistrationView(CreateAPIView):
 
     queryset = User.objects.all()
     serializer_class = RegisterUserSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [AllowAny, DjangoModelPermissions]
 
 
 class UserLoginView(CreateAPIView):
@@ -27,7 +27,7 @@ class UserLoginView(CreateAPIView):
 
     queryset = User.objects.all()
     serializer_class = LoginUserSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [AllowAny, DjangoModelPermissions]
 
 
 class UserLogoutView(APIView):
@@ -49,7 +49,7 @@ class ProfilesUsersView(ListAPIView):
 
     queryset = User.objects.all()
     serializer_class = CustomUserSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, DjangoModelPermissions]
 
 
 class ProfileDetailUserView(RetrieveAPIView):
@@ -58,7 +58,7 @@ class ProfileDetailUserView(RetrieveAPIView):
     """
     queryset = User.objects.all()
     serializer_class = CustomUserSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, DjangoModelPermissions]
 
 
 class MeProfileUserView(RetrieveAPIView, UpdateAPIView):
@@ -67,7 +67,7 @@ class MeProfileUserView(RetrieveAPIView, UpdateAPIView):
     """
 
     serializer_class = MeUserProfileSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, DjangoModelPermissions]
 
 
     def get_object(self):

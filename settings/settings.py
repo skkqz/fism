@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-njr&jx)20!4-g@+!523wqd$!ud0^t=y-k$+5=a3)*1y%0uzrl!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -192,6 +192,8 @@ EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SERVER_EMAIL = EMAIL_HOST_USER
 EMAIL_ADMIN = EMAIL_HOST_USER
+
+CSRF_TRUSTED_ORIGINS = ['https://skkqz-fism-d929.twc1.net']
 
 
 # LOGGING = {

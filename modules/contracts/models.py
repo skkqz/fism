@@ -42,7 +42,7 @@ class Contract(models.Model):
         verbose_name_plural = 'Страховые договоры'
 
     def __str__(self):
-        return self.product
+        return self.product.name
 
 
 class ContractRisk(models.Model):

@@ -7,14 +7,12 @@ def create_superuser(apps, schema_editor):
 
     # Параметры для суперпользователя
     superuser_email = 'qwe@qwe.com'
-    superuser_username = 'admin'
     superuser_password = 'qwe'
 
     # Проверяем, существует ли суперпользователь с таким email
     if not User.objects.filter(email=superuser_email).exists():
         # Создаем суперпользователя
         User.objects.create_superuser(
-            username=superuser_username,
             email=superuser_email,
             password=superuser_password
         )
